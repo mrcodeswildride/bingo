@@ -2,40 +2,40 @@
 <html>
 
 <head>
-    <title>Bingo</title>
-    <meta name="viewport" content="width=device-width, initial-scale=0.5">
-    <link rel="stylesheet" href="stylesheet.css">
+	<title>Bingo</title>
+	<meta name="viewport" content="width=device-width, initial-scale=0.5">
+	<link href="style.css" rel="stylesheet">
+	<script src="script.js" defer>
+
+	</script>
 </head>
 
 <body>
-    <h1>Bingo</h1>
+	<h1>Bingo</h1>
 
-    <div id="board">
-        <div>
-            <div class="square"></div>
-            <div class="square"></div>
-            <div class="square"></div>
-        </div>
-        <div>
-            <div class="square"></div>
-            <div class="square"></div>
-            <div class="square"></div>
-        </div>
-        <div>
-            <div class="square"></div>
-            <div class="square"></div>
-            <div class="square"></div>
-        </div>
-    </div>
+	<div id="grid">
+		<div>
+			<div class="square"></div>
+			<div class="square"></div>
+			<div class="square"></div>
+		</div>
+		<div>
+			<div class="square"></div>
+			<div class="square"></div>
+			<div class="square"></div>
+		</div>
+		<div>
+			<div class="square"></div>
+			<div class="square"></div>
+			<div class="square"></div>
+		</div>
+	</div>
 
-    <div id="numbersDrawn">
-        <h2>Numbers Drawn</h2>
-        <p id="numbers"></p>
-
-        <p id="message"></p>
-    </div>
-
-    <script src="script.js"></script>
+	<div id="sidePanel">
+		<h2>Numbers Drawn</h2>
+		<p id="numbersParagraph"></p>
+		<p id="messageParagraph"></p>
+	</div>
 </body>
 
 </html>

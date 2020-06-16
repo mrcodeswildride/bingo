@@ -1,109 +1,96 @@
-var squares = document.querySelectorAll(".square");
-var numbersDisplay = document.getElementById("numbers");
-var message = document.getElementById("message");
+let squares = document.getElementsByClassName(`square`)
+let numbersParagraph = document.getElementById(`numbersParagraph`)
+let messageParagraph = document.getElementById(`messageParagraph`)
 
-var allNumbers = [];
-var drawnNumbers = [];
-var gameOver = false;
-var timeoutId;
+let numbers = []
+let nextIndexToDraw = 0
+let gameOver = false
+let intervalId
 
-for (var i = 0; i < squares.length; i++) {
-    squares[i].addEventListener("click", markNumber);
+for (let i = 1; i <= 40; i++) {
+  numbers.push(i)
 }
 
-// generate numbers
-for (var i = 1; i <= 40; i++) {
-    allNumbers.push(i);
+shuffle()
+
+for (let i = 0; i < squares.length; i++) {
+  squares[i].innerHTML = numbers[i]
 }
 
-// generate board
-shuffle();
+shuffle()
 
-for (var i = 0; i < squares.length; i++) {
-    squares[i].innerHTML = allNumbers[i];
-}
+intervalId = setInterval(drawNumber, 2000)
 
-// shuffle numbers to draw from
-shuffle();
-
-// draw first number
-setTimeout(drawNumber, 1000);
-
-function markNumber() {
-    if (!gameOver) {
-        for (var i = 0; i < drawnNumbers.length; i++) {
-            if (this.innerHTML == drawnNumbers[i]) {
-                var marker = document.createElement("div");
-                marker.classList.add("marker");
-                this.appendChild(marker);
-
-                this.classList.add("marked");
-
-                if (isBingo()) {
-                    clearTimeout(timeoutId);
-                    gameOver = true;
-                    message.innerHTML = "Bingo!";
-                }
-
-                break;
-            }
-        }
-    }
-}
-
-function drawNumber() {
-    if (drawnNumbers.length < 20) {
-        var drawnNumber = allNumbers[drawnNumbers.length];
-
-        drawnNumbers.push(drawnNumber);
-        numbersDisplay.innerHTML += drawnNumber + " ";
-
-        timeoutId = setTimeout(drawNumber, 2000);
-    }
-    else {
-        gameOver = true;
-        message.innerHTML = "You lose";
-    }
+for (let square of squares) {
+  square.addEventListener(`click`, markNumber)
 }
 
 function shuffle() {
-    for (var i = 0; i < allNumbers.length * 10; i++) {
-        var randomNumber1 = Math.floor(Math.random() * allNumbers.length);
-        var randomNumber2 = Math.floor(Math.random() * allNumbers.length);
+  for (let i = 0; i < 400; i++) {
+    let randomNumber1 = Math.floor(Math.random() * numbers.length)
+    let randomNumber2 = Math.floor(Math.random() * numbers.length)
 
-        var temp = allNumbers[randomNumber2];
+    let temp = numbers[randomNumber1]
+    numbers[randomNumber1] = numbers[randomNumber2]
+    numbers[randomNumber2] = temp
+  }
+}
 
-        allNumbers[randomNumber2] = allNumbers[randomNumber1];
-        allNumbers[randomNumber1] = temp;
+function drawNumber() {
+  if (nextIndexToDraw < 20) {
+    numbersParagraph.innerHTML = `${numbersParagraph.innerHTML} ${numbers[nextIndexToDraw]}`
+    nextIndexToDraw = nextIndexToDraw + 1
+  }
+  else {
+    messageParagraph.innerHTML = `You lose`
+    gameOver = true
+    clearInterval(intervalId)
+  }
+}
+
+function markNumber() {
+  if (!this.classList.contains(`marked`) && !gameOver) {
+    for (let i = 0; i < nextIndexToDraw; i++) {
+      if (this.innerHTML == numbers[i]) {
+        this.classList.add(`marked`)
+
+        if (isBingo()) {
+          messageParagraph.innerHTML = `Bingo!`
+          gameOver = true
+          clearInterval(intervalId)
+        }
+
+        break
+      }
     }
+  }
 }
 
 function isBingo() {
-    if (squares[0].classList.contains("marked") && squares[1].classList.contains("marked") && squares[2].classList.contains("marked")) {
-        return true;
-    }
-    else if (squares[3].classList.contains("marked") && squares[4].classList.contains("marked") && squares[5].classList.contains("marked")) {
-        return true;
-    }
-    else if (squares[6].classList.contains("marked") && squares[7].classList.contains("marked") && squares[8].classList.contains("marked")) {
-        return true;
-    }
-    else if (squares[0].classList.contains("marked") && squares[3].classList.contains("marked") && squares[6].classList.contains("marked")) {
-        return true;
-    }
-    else if (squares[1].classList.contains("marked") && squares[4].classList.contains("marked") && squares[7].classList.contains("marked")) {
-        return true;
-    }
-    else if (squares[2].classList.contains("marked") && squares[5].classList.contains("marked") && squares[8].classList.contains("marked")) {
-        return true;
-    }
-    else if (squares[0].classList.contains("marked") && squares[4].classList.contains("marked") && squares[8].classList.contains("marked")) {
-        return true;
-    }
-    else if (squares[2].classList.contains("marked") && squares[4].classList.contains("marked") && squares[6].classList.contains("marked")) {
-        return true;
-    }
-    else {
-        return false;
-    }
+  if (squares[0].classList.contains(`marked`) && squares[1].classList.contains(`marked`) && squares[2].classList.contains(`marked`)) {
+    return true
+  }
+  else if (squares[3].classList.contains(`marked`) && squares[4].classList.contains(`marked`) && squares[5].classList.contains(`marked`)) {
+    return true
+  }
+  else if (squares[6].classList.contains(`marked`) && squares[7].classList.contains(`marked`) && squares[8].classList.contains(`marked`)) {
+    return true
+  }
+  else if (squares[0].classList.contains(`marked`) && squares[3].classList.contains(`marked`) && squares[6].classList.contains(`marked`)) {
+    return true
+  }
+  else if (squares[1].classList.contains(`marked`) && squares[4].classList.contains(`marked`) && squares[7].classList.contains(`marked`)) {
+    return true
+  }
+  else if (squares[2].classList.contains(`marked`) && squares[5].classList.contains(`marked`) && squares[8].classList.contains(`marked`)) {
+    return true
+  }
+  else if (squares[0].classList.contains(`marked`) && squares[4].classList.contains(`marked`) && squares[8].classList.contains(`marked`)) {
+    return true
+  }
+  else if (squares[2].classList.contains(`marked`) && squares[4].classList.contains(`marked`) && squares[6].classList.contains(`marked`)) {
+    return true
+  }
+
+  return false
 }
