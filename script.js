@@ -1,44 +1,47 @@
 let squares = document.getElementsByClassName(`square`)
-let numbersParagraph = document.getElementById(`numbersParagraph`)
+let startButton = document.getElementById(`startButton`)
+let lettersParagraph = document.getElementById(`lettersParagraph`)
 let messageParagraph = document.getElementById(`messageParagraph`)
 
-let numbers = []
+let letters = []
 let nextIndexToDraw = 0
 let gameOver = false
 let intervalId
 
-for (let i = 1; i <= 40; i++) {
-  numbers.push(i)
+for (let i = 65; i <= 90; i++) {
+  letters.push(String.fromCharCode(i))
 }
 
 shuffle()
 
 for (let i = 0; i < squares.length; i++) {
-  squares[i].innerHTML = numbers[i]
+  squares[i].innerHTML = letters[i]
+  squares[i].addEventListener(`click`, markLetter)
 }
 
-shuffle()
-
-intervalId = setInterval(drawNumber, 2000)
-
-for (let square of squares) {
-  square.addEventListener(`click`, markNumber)
-}
+startButton.addEventListener(`click`, startGame)
 
 function shuffle() {
-  for (let i = 0; i < 400; i++) {
-    let randomNumber1 = Math.floor(Math.random() * numbers.length)
-    let randomNumber2 = Math.floor(Math.random() * numbers.length)
+  for (let i = 0; i < 250; i++) {
+    let randomNumber1 = Math.floor(Math.random() * letters.length)
+    let randomNumber2 = Math.floor(Math.random() * letters.length)
 
-    let temp = numbers[randomNumber1]
-    numbers[randomNumber1] = numbers[randomNumber2]
-    numbers[randomNumber2] = temp
+    let temp = letters[randomNumber1]
+    letters[randomNumber1] = letters[randomNumber2]
+    letters[randomNumber2] = temp
   }
 }
 
-function drawNumber() {
-  if (nextIndexToDraw < 20) {
-    numbersParagraph.innerHTML = `${numbersParagraph.innerHTML} ${numbers[nextIndexToDraw]}`
+function startGame() {
+  startButton.style.display = `none`
+
+  shuffle()
+  intervalId = setInterval(drawLetter, 2000)
+}
+
+function drawLetter() {
+  if (nextIndexToDraw < 13) {
+    lettersParagraph.innerHTML = `${lettersParagraph.innerHTML} ${letters[nextIndexToDraw]}`
     nextIndexToDraw = nextIndexToDraw + 1
   }
   else {
@@ -48,10 +51,10 @@ function drawNumber() {
   }
 }
 
-function markNumber() {
+function markLetter() {
   if (!this.classList.contains(`marked`) && !gameOver) {
     for (let i = 0; i < nextIndexToDraw; i++) {
-      if (this.innerHTML == numbers[i]) {
+      if (this.innerHTML == letters[i]) {
         this.classList.add(`marked`)
 
         if (isBingo()) {

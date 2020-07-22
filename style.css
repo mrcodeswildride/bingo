@@ -24,8 +24,8 @@ body {
   font-size: 50px;
   text-align: center;
   line-height: 100px;
-  user-select: none;
   cursor: pointer;
+  user-select: none;
 }
 
 .marked {
@@ -36,8 +36,12 @@ h2 {
   margin-top: 0;
 }
 
-#numbersParagraph {
-  width: 350px;
+#startButton {
+  padding: 5px;
+}
+
+#lettersParagraph {
+  width: 200px;
   font-size: 30px;
   word-spacing: 10px;
   line-height: 50px;
