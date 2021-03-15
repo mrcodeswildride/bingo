@@ -3,14 +3,11 @@ let startButton = document.getElementById(`startButton`)
 let lettersParagraph = document.getElementById(`lettersParagraph`)
 let messageParagraph = document.getElementById(`messageParagraph`)
 
-let letters = []
+let letters = [`A`, `B`, `C`, `D`, `E`, `F`, `G`, `H`, `I`, `J`, `K`, `L`, `M`, `N`, `O`, `P`, `Q`, `R`, `S`, `T`, `U`, `V`, `W`, `X`, `Y`, `Z`]
+
 let nextIndexToDraw = 0
 let gameOver = false
 let intervalId
-
-for (let i = 65; i <= 90; i++) {
-  letters.push(String.fromCharCode(i))
-}
 
 shuffle()
 
