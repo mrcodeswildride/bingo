@@ -3,7 +3,34 @@ let startButton = document.getElementById(`startButton`)
 let lettersParagraph = document.getElementById(`lettersParagraph`)
 let messageParagraph = document.getElementById(`messageParagraph`)
 
-let letters = [`A`, `B`, `C`, `D`, `E`, `F`, `G`, `H`, `I`, `J`, `K`, `L`, `M`, `N`, `O`, `P`, `Q`, `R`, `S`, `T`, `U`, `V`, `W`, `X`, `Y`, `Z`]
+let letters = [
+  `A`,
+  `B`,
+  `C`,
+  `D`,
+  `E`,
+  `F`,
+  `G`,
+  `H`,
+  `I`,
+  `J`,
+  `K`,
+  `L`,
+  `M`,
+  `N`,
+  `O`,
+  `P`,
+  `Q`,
+  `R`,
+  `S`,
+  `T`,
+  `U`,
+  `V`,
+  `W`,
+  `X`,
+  `Y`,
+  `Z`,
+]
 
 let nextIndexToDraw = 0
 let gameOver = false
@@ -40,8 +67,7 @@ function drawLetter() {
   if (nextIndexToDraw < 13) {
     lettersParagraph.innerHTML = `${lettersParagraph.innerHTML} ${letters[nextIndexToDraw]}`
     nextIndexToDraw = nextIndexToDraw + 1
-  }
-  else {
+  } else {
     messageParagraph.innerHTML = `You lose`
     gameOver = true
     clearInterval(intervalId)
@@ -67,28 +93,53 @@ function markLetter() {
 }
 
 function isBingo() {
-  if (squares[0].classList.contains(`marked`) && squares[1].classList.contains(`marked`) && squares[2].classList.contains(`marked`)) {
+  if (
+    squares[0].classList.contains(`marked`) &&
+    squares[1].classList.contains(`marked`) &&
+    squares[2].classList.contains(`marked`)
+  ) {
     return true
-  }
-  else if (squares[3].classList.contains(`marked`) && squares[4].classList.contains(`marked`) && squares[5].classList.contains(`marked`)) {
+  } else if (
+    squares[3].classList.contains(`marked`) &&
+    squares[4].classList.contains(`marked`) &&
+    squares[5].classList.contains(`marked`)
+  ) {
     return true
-  }
-  else if (squares[6].classList.contains(`marked`) && squares[7].classList.contains(`marked`) && squares[8].classList.contains(`marked`)) {
+  } else if (
+    squares[6].classList.contains(`marked`) &&
+    squares[7].classList.contains(`marked`) &&
+    squares[8].classList.contains(`marked`)
+  ) {
     return true
-  }
-  else if (squares[0].classList.contains(`marked`) && squares[3].classList.contains(`marked`) && squares[6].classList.contains(`marked`)) {
+  } else if (
+    squares[0].classList.contains(`marked`) &&
+    squares[3].classList.contains(`marked`) &&
+    squares[6].classList.contains(`marked`)
+  ) {
     return true
-  }
-  else if (squares[1].classList.contains(`marked`) && squares[4].classList.contains(`marked`) && squares[7].classList.contains(`marked`)) {
+  } else if (
+    squares[1].classList.contains(`marked`) &&
+    squares[4].classList.contains(`marked`) &&
+    squares[7].classList.contains(`marked`)
+  ) {
     return true
-  }
-  else if (squares[2].classList.contains(`marked`) && squares[5].classList.contains(`marked`) && squares[8].classList.contains(`marked`)) {
+  } else if (
+    squares[2].classList.contains(`marked`) &&
+    squares[5].classList.contains(`marked`) &&
+    squares[8].classList.contains(`marked`)
+  ) {
     return true
-  }
-  else if (squares[0].classList.contains(`marked`) && squares[4].classList.contains(`marked`) && squares[8].classList.contains(`marked`)) {
+  } else if (
+    squares[0].classList.contains(`marked`) &&
+    squares[4].classList.contains(`marked`) &&
+    squares[8].classList.contains(`marked`)
+  ) {
     return true
-  }
-  else if (squares[2].classList.contains(`marked`) && squares[4].classList.contains(`marked`) && squares[6].classList.contains(`marked`)) {
+  } else if (
+    squares[2].classList.contains(`marked`) &&
+    squares[4].classList.contains(`marked`) &&
+    squares[6].classList.contains(`marked`)
+  ) {
     return true
   }
 
